@@ -2,16 +2,33 @@ package ac.za.cput.cardealership.factory;
 
 import ac.za.cput.cardealership.domain.Person;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonFactoryTest {
 
-    @Test
-    public void getCustomer() {
+    Map<String,String> values;
 
-        String name = "Siphe";
-        Person c =PersonFactory.getCustomer(name);
-        System.out.println(c);
-        Assert.assertNotNull(c.getId());
+
+
+    @Before
+    public void setUp() throws Exception {
+        values = new HashMap<String, String>();
+        values.put("id","1");
+        values.put("firstname","Siphe");
+        values.put("lastname","Mpetsheni");
+    }
+
+    @Test
+    public void getPerson()throws Exception {
+
+
+        Person c =PersonFactory.getPerson(values,"0847204852");
+        Assert.assertEquals("0847204852",c.getPhoneNumber());
     }
 }
+
+

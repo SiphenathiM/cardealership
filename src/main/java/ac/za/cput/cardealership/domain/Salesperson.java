@@ -5,9 +5,37 @@ public class Salesperson extends Person {
     private double salary;
     private String position;
 
-    public Salesperson(String id, String firstname, String lastname, String phoneNumber, String address, double salary, String position) {
-        super(id, firstname, lastname, phoneNumber, address);
+    public Salesperson(Builder builder) {
+        //super(builder);
         this.salary = salary;
         this.position = position;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public static class Builder {
+        private double salary;
+        private String position;
+
+        public Builder salary(double salary) {
+
+            this.salary = salary;
+            return this;
+        }
+        public Builder position(String position) {
+            this.position = position;
+            return this;
+        }
+
+
+        public Salesperson build() {
+            return new Salesperson(this);
+        }
     }
 }

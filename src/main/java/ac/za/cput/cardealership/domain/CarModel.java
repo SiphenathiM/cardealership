@@ -2,6 +2,7 @@ package ac.za.cput.cardealership.domain;
 
 public class CarModel {
 
+
     private String name;
     private  double price;
 
@@ -17,6 +18,7 @@ public class CarModel {
     public double getPrice() {
         return price;
     }
+
 
     public CarModel(Builder builder) {
 

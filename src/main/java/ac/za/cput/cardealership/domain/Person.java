@@ -8,15 +8,12 @@ public class Person {
     private String firstname;
     private String lastname;
     private  String phoneNumber;
-    private  String address;
 
-    public Person(String id, String firstname, String lastname, String phoneNumber, String address) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+
+    public Person() {
+
     }
+
 
     public String getId() {
         return id;
@@ -38,9 +35,7 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
-    }
+
 
 
 
@@ -50,7 +45,7 @@ public class Person {
         this.firstname = builder.firstname;
         this.lastname = builder.lastname;
         this.phoneNumber = builder.phoneNumber;
-        this.address = builder.address;
+
     }
 
     public static class Builder{
@@ -59,7 +54,7 @@ public class Person {
         private String firstname;
         private String lastname;
         private  String phoneNumber;
-        private  String address;
+
 
 
         public  Builder id(String id){
@@ -82,10 +77,7 @@ public class Person {
             return this;
         }
 
-        public  Builder address(String address){
-            this.address= address;
-            return this;
-        }
+
 
         public Person build (){
             return new Person(this);
@@ -99,7 +91,6 @@ public class Person {
                     ", firstname='" + firstname + '\'' +
                     ", lastname='" + lastname + '\'' +
                     ", phoneNumber='" + phoneNumber + '\'' +
-                    ", address='" + address + '\'' +
                     '}';
         }
     }

@@ -5,11 +5,6 @@ public class Customer extends Person{
     private int discount;
     private String type;
 
-    public Customer(String id, String firstname, String lastname, String phoneNumber, String address, int discount, String type) {
-        super(id, firstname, lastname, phoneNumber, address);
-        this.discount = discount;
-        this.type = type;
-    }
 
     public int getDiscount() {
         return discount;
@@ -17,5 +12,32 @@ public class Customer extends Person{
 
     public String getType() {
         return type;
+    }
+
+    public Customer(Builder builder) {
+        super(builder);
+        this.discount = discount;
+        this.type = type;
+    }
+
+    public static class Builder extends Person.Builder {
+
+        private int discount;
+        private String type;
+
+
+        public Builder discount(int discount) {
+            this.discount = discount;
+            return this;
+        }
+
+        public Builder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public Customer build() {
+            return new Customer(this);
+        }
     }
 }
