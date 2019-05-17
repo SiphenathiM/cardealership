@@ -1,8 +1,9 @@
 package ac.za.cput.cardealership.repositories;
 
-import ac.za.cput.cardealership.domain.Person;
-import ac.za.cput.cardealership.factory.PersonFactory;
-import ac.za.cput.cardealership.repositories.impl.PersonRepositoryImpl;
+import ac.za.cput.cardealership.domain.people.Person;
+import ac.za.cput.cardealership.factory.people.PersonFactory;
+import ac.za.cput.cardealership.repositories.people.impl.PersonRepositoryImpl;
+import ac.za.cput.cardealership.repositories.people.PersonRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
