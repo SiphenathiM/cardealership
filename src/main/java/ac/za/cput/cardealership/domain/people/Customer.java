@@ -1,6 +1,6 @@
 package ac.za.cput.cardealership.domain.people;
 
-public class Customer extends Person {
+public class Customer {
 
     private int discount;
     private String type;
@@ -14,13 +14,12 @@ public class Customer extends Person {
         return type;
     }
 
-    public Customer(Builder builder) {
-        super(builder);
+      public Customer(Builder builder) {
         this.discount = discount;
         this.type = type;
     }
 
-    public static class Builder extends Person.Builder {
+    public static class Builder {
 
         private int discount;
         private String type;

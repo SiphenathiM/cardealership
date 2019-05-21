@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class PersonFactory {
 
-    public static Person getPerson( Map<String, String> values,String phoneNumber){
+    public static Person getPerson(String firstname,String lastname ,String phoneNumber){
         return new Person.Builder().id(Misc.generatedId())
-                .firstname(values.get("firstname"))
-                .lastname(values.get("lastname"))
+                .firstname(firstname)
+                .lastname(lastname)
                 .phoneNumber(phoneNumber)
                 .build();
     }

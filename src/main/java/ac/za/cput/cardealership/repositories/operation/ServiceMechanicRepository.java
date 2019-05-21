@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.repositories.operation;
 
+import ac.za.cput.cardealership.domain.finance.FinancingSale;
 import ac.za.cput.cardealership.domain.operation.ServiceMechanic;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface ServiceMechanicRepository {
+import java.util.Set;
 
-    ServiceMechanic create(ServiceMechanic serviceMechanic);
+public interface ServiceMechanicRepository extends IRepository<ServiceMechanic,String> {
 
-    ServiceMechanic read(String serviceMachenicID);
-
-    ServiceMechanic update(ServiceMechanic serviceMechanic);
-
-    void delete(String serviceMachenicID);
+    Set<ServiceMechanic> getAll();
 }

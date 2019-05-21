@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.services.people;
 
 import ac.za.cput.cardealership.domain.people.City;
+import ac.za.cput.cardealership.domain.people.Mechanic;
+import ac.za.cput.cardealership.services.IService.IService;
 
-public interface CityService {
+import java.util.Set;
 
-    City create(City city);
+public interface CityService extends IService<City,String> {
 
-    City read(String cityZipCode);
-
-    City update(City city);
-
-    void delete(String cityZipCode);
+    Set<Mechanic> getAll();
 }

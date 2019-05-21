@@ -4,8 +4,10 @@ package ac.za.cput.cardealership.repositories.finance.impl;
 import ac.za.cput.cardealership.domain.finance.CashSale;
 import ac.za.cput.cardealership.repositories.finance.CashSaleRepository;
 
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class CashSaleRepositoryImpl implements CashSaleRepository {
 
@@ -46,5 +48,10 @@ public class CashSaleRepositoryImpl implements CashSaleRepository {
     @Override
     public void delete(String payType) {
         cashSaleTable.remove(payType);
+    }
+
+    @Override
+    public Set<CashSale> getAll() {
+        return null;
     }
 }

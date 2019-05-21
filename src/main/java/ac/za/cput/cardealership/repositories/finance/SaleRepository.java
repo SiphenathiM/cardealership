@@ -1,14 +1,14 @@
 package ac.za.cput.cardealership.repositories.finance;
 
 import ac.za.cput.cardealership.domain.finance.Sale;
+import ac.za.cput.cardealership.domain.finance.SalesInvoice;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface SaleRepository {
+import java.util.Set;
 
-    Sale create(Sale sale);
+public interface SaleRepository extends IRepository<Sale,String> {
 
-    Sale read(String date);
+    Set<Sale> getAll();
 
-    Sale update(Sale sale);
 
-    void delete(String date);
 }

@@ -2,7 +2,8 @@ package ac.za.cput.cardealership.domain.people;
 
 public class Mechanic {
 
-   private String mechanicID;
+
+    private String mechanicID;
     private String firstName;
     private String lastName;
 

@@ -6,7 +6,6 @@ public class Salesperson extends Person {
     private String position;
 
     public Salesperson(Builder builder) {
-        //super(builder);
         this.salary = salary;
         this.position = position;
     }

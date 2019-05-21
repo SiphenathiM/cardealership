@@ -1,12 +1,13 @@
 package ac.za.cput.cardealership.services.people;
 
+import ac.za.cput.cardealership.domain.people.Mechanic;
 import ac.za.cput.cardealership.domain.people.Person;
+import ac.za.cput.cardealership.services.IService.IService;
 
-public interface PersonService {
+import java.util.Set;
 
-    Person create(Person person);
-    Person read(String id);
-    Person update(Person person);
-    void delete (String id);
+public interface PersonService extends IService<Person,String> {
+
+    Set<Person> getAll();
 
 }

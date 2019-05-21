@@ -3,51 +3,62 @@ package ac.za.cput.cardealership.repositories.people.impl;
 import ac.za.cput.cardealership.domain.people.Address;
 import ac.za.cput.cardealership.repositories.people.AddressRepository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class AddressRepositoryImpl implements AddressRepository {
 
-    private static AddressRepositoryImpl respository = null;
+    private static AddressRepositoryImpl repository = null;
+    private Set<Address> addresses;
 
-    private Map<String,Address> addressTable;
-
-    private AddressRepositoryImpl() {
-        addressTable = new HashMap<String, Address>();
+    private AddressRepositoryImpl(){
+        this.addresses = new HashSet<>();
     }
 
-    public static AddressRepositoryImpl getInstance(){
-        if(respository==null)
-            respository = new AddressRepositoryImpl();
-        return respository;
+    public static AddressRepositoryImpl getRepository(){
+        if (repository == null) repository = new AddressRepositoryImpl();
+        return repository;
+    }
+
+    private Address search(String number){
+        return this.addresses.stream()
+                .filter(addresses -> addresses.getNumber().trim().equals(number ) )
+                .findAny()
+                .orElse( null );
     }
 
 
+    @Override
+    public Set<Address> getAll() {
+        return null;
+    }
 
     @Override
     public Address create(Address address) {
-        addressTable.put(address.getNumber(),address);
-        Address savedAddress = addressTable.get(address.getNumber());
-        return savedAddress;
-    }
-
-    @Override
-    public Address read(String number) {
-        Address address = addressTable.get(number);
+        this.addresses.add(address);
         return address;
     }
 
     @Override
     public Address update(Address address) {
-        addressTable.put(address.getNumber(),address);
-        Address savedAddress = addressTable.get(address.getNumber());
-        return savedAddress;
+        Address toUpdate = search(address.getNumber() );
+        if(toUpdate != null){
+            this.addresses.remove( toUpdate );
+            return create(address );
+        }
+        return null;
     }
 
     @Override
     public void delete(String number) {
-        addressTable.remove(number);
+        Address address = search( number);
+        if(address != null) this.addresses.remove( address );
     }
 
-
+    @Override
+    public Address read(String number) {
+        Address  address = search( number );
+        return address;
+    }
 }

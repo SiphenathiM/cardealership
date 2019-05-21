@@ -5,6 +5,7 @@ import ac.za.cput.cardealership.repositories.vehicle.CarModelRepository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class CarModelRepositoryImpl implements CarModelRepository {
 
@@ -49,4 +50,8 @@ public class CarModelRepositoryImpl implements CarModelRepository {
         carModelTable.remove(model);
     }
 
+    @Override
+    public Set<CarModel> getAll() {
+        return null;
+    }
 }

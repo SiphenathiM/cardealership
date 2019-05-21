@@ -1,13 +1,11 @@
 package ac.za.cput.cardealership.repositories.vehicle;
 
+import ac.za.cput.cardealership.domain.product.PartUsed;
 import ac.za.cput.cardealership.domain.vehicle.Car;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface CarRepository{
-    Car create(Car car);
+import java.util.Set;
 
-    Car read(String carID);
-
-    Car update(Car car);
-
-    void delete(String carID);
+public interface CarRepository extends IRepository<Car,String> {
+    Set<Car> getAll();
 }

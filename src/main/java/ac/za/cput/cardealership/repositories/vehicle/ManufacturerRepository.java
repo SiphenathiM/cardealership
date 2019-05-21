@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.repositories.vehicle;
 
+import ac.za.cput.cardealership.domain.product.PartUsed;
 import ac.za.cput.cardealership.domain.vehicle.Manufacturer;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface ManufacturerRepository{
+import java.util.Set;
 
-    Manufacturer create(Manufacturer manufacturer);
+public interface ManufacturerRepository extends IRepository<Manufacturer,String> {
 
-    Manufacturer read(String name);
-
-    Manufacturer update(Manufacturer manufacturer);
-
-    void delete(String name);
+    Set<Manufacturer> getAll();
 }

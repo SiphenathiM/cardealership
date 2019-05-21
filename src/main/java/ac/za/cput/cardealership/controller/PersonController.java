@@ -20,12 +20,12 @@ public class PersonController {
 
     @GetMapping("/create/{firstname}")
     public @ResponseBody
-    Person create(@PathVariable Map<String, String> values, String phoneNumber) {
-        Person person = PersonFactory.getPerson(values, phoneNumber);
+    Person create(@PathVariable String name, String last, String phoneNumber) {
+        Person person = PersonFactory.getPerson(name,last,phoneNumber);
         return service.create(person);
 
     }
-}
+
 
 /*@Controller
 class PersonController {
@@ -33,5 +33,5 @@ class PersonController {
     @ResponseBody
     public String hello() {
        return  "Hello Spring Boot";
-    }
-}*/
+    }*/
+}

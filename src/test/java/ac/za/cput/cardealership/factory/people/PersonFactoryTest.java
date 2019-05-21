@@ -27,7 +27,7 @@ public class PersonFactoryTest {
     public void getPerson()throws Exception {
 
 
-        Person c = PersonFactory.getPerson(values,"0847204852");
+        Person c = PersonFactory.getPerson("siphe","mpe","0847204852");
         Assert.assertEquals("0847204852",c.getPhoneNumber());
     }
 }

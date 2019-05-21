@@ -1,13 +1,12 @@
 package ac.za.cput.cardealership.repositories.people;
 
 import ac.za.cput.cardealership.domain.people.City;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface CityRepository{
-    City create(City city);
+import java.util.Set;
 
-    City read(String cityZipCode);
+public interface CityRepository extends IRepository<City,String> {
 
-    City update(City city);
+    Set<City> getAll();
 
-    void delete(String cityZipCode);
 }

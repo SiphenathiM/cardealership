@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.services.finance;
 
+import ac.za.cput.cardealership.domain.finance.Sale;
 import ac.za.cput.cardealership.domain.finance.SalesInvoice;
+import ac.za.cput.cardealership.services.IService.IService;
 
-public interface SalesInvoiceService {
+import java.util.Set;
 
-    SalesInvoice create(SalesInvoice salesInvoice);
+public interface SalesInvoiceService extends IService<SalesInvoice,String> {
 
-    SalesInvoice read(String invoiceID);
-
-    SalesInvoice update(SalesInvoice salesInvoice);
-
-    void delete(String invoiceID);
+    Set<SalesInvoice> getAll();
 }

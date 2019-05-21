@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.repositories.people;
 
 import ac.za.cput.cardealership.domain.people.Customer;
+import ac.za.cput.cardealership.domain.people.Person;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface CustomerRepository {
+import java.util.Set;
 
-    Customer create(Customer customer);
+public interface CustomerRepository extends IRepository<Customer,String> {
 
-    Customer read(String type);
-
-    Customer update(Customer customer);
-
-    void delete(String type);
+    Set<Customer> getAll();
 }

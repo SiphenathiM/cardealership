@@ -3,49 +3,60 @@ package ac.za.cput.cardealership.repositories.people.impl;
 import ac.za.cput.cardealership.domain.people.Person;
 import ac.za.cput.cardealership.repositories.people.PersonRepository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PersonRepositoryImpl implements PersonRepository {
 
+    private static PersonRepositoryImpl  repository = null;
+    private Set<Person> person;
 
-    private static PersonRepositoryImpl respository = null;
-
-    private Map<String,Person> personTable;
-
-    private PersonRepositoryImpl() {
-        personTable = new HashMap<String, Person>();
+    private PersonRepositoryImpl(){
+        this.person = new HashSet<>();
     }
 
-    public static PersonRepositoryImpl getInstance(){
-        if(respository==null)
-            respository = new PersonRepositoryImpl();
-        return respository;
+    public static PersonRepositoryImpl  getRepository(){
+        if (repository == null) repository = new PersonRepositoryImpl ();
+        return repository;
     }
 
+    private Person search(String Id){
+        return this.person.stream()
+                .filter( person -> person.getId().trim().equals( Id ) )
+                .findAny()
+                .orElse( null );
+    }
+
+    @Override
+    public Set<Person> getAll() {
+        return this.person;
+    }
 
     @Override
     public Person create(Person person) {
-        personTable.put(person.getId(),person);
-        Person savedPerson = personTable.get(person.getId());
-        return savedPerson;
-    }
-
-    @Override
-    public Person read(String id) {
-        Person person = personTable.get(id);
+        this.person.add(person);
         return person;
     }
 
     @Override
     public Person update(Person person) {
-        personTable.put(person.getId(),person);
-        Person savedPerson = personTable.get(person.getId());
-        return savedPerson;
+        Person toUpdate = search( person.getId() );
+        if(toUpdate != null){
+            this.person.remove( toUpdate );
+            return create( person );
+        }
+        return null;
     }
 
     @Override
     public void delete(String id) {
-        personTable.remove(id);
+        Person person = search( id );
+        if(person != null) this.person.remove( person );
+    }
+
+    @Override
+    public Person read(String id) {
+        Person person = search( id );
+        return person;
     }
 }

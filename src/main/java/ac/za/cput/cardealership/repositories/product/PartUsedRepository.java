@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.repositories.product;
 
+import ac.za.cput.cardealership.domain.finance.SalesInvoice;
 import ac.za.cput.cardealership.domain.product.PartUsed;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface PartUsedRepository{
+import java.util.Set;
 
-    PartUsed create(PartUsed partUsed);
+public interface PartUsedRepository extends IRepository<PartUsed,String> {
 
-    PartUsed read(String partsUsedID);
-
-    PartUsed update(PartUsed partUsed);
-
-    void delete(String partsUsedID);
+    Set<PartUsed> getAll();
 }

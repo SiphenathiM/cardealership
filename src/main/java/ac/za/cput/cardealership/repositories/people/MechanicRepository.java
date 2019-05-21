@@ -1,14 +1,12 @@
 package ac.za.cput.cardealership.repositories.people;
 
 import ac.za.cput.cardealership.domain.people.Mechanic;
+import ac.za.cput.cardealership.domain.people.Person;
+import ac.za.cput.cardealership.repositories.IRepository.IRepository;
 
-public interface MechanicRepository {
+import java.util.Set;
 
-    Mechanic create(Mechanic mechanic);
+public interface MechanicRepository extends IRepository<Mechanic,String> {
 
-    Mechanic read(String mechanicID);
-
-    Mechanic update(Mechanic mechanic);
-
-    void delete(String mechanicID);
+    Set<Mechanic> getAll();
 }
