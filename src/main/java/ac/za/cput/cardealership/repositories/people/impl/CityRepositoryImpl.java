@@ -31,7 +31,7 @@ public class CityRepositoryImpl implements CityRepository {
 
     @Override
     public Set<City> getAll() {
-        return this.repository.getAll();
+        return null;
 
     }
 

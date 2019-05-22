@@ -1,9 +1,11 @@
-package ac.za.cput.cardealership.repositories.people.impl;
+package ac.za.cput.cardealership.services.people.impl;
 
 import ac.za.cput.cardealership.domain.people.Person;
 import ac.za.cput.cardealership.domain.people.Salesperson;
 import ac.za.cput.cardealership.factory.people.PersonFactory;
 import ac.za.cput.cardealership.factory.people.SalespersonFactory;
+import ac.za.cput.cardealership.repositories.people.impl.SalesPersonRepositoryImpl;
+import ac.za.cput.cardealership.services.people.SalesPersonService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +14,9 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
-public class SalesPersonRepositoryImplTest {
+public class SalesPersonServiceImplTest {
 
-
-
-    private SalesPersonRepositoryImpl repository;
+    private SalesPersonService repository;
     private Salesperson salesperson;
 
 
@@ -24,7 +24,7 @@ public class SalesPersonRepositoryImplTest {
     @Before
     public void setUp() throws Exception {
 
-        this.repository= (SalesPersonRepositoryImpl) SalesPersonRepositoryImpl.getRepository();
+        this.repository= ( SalesPersonServiceImpl) SalesPersonServiceImpl.getRepository();
         this.salesperson = SalespersonFactory.getSalesperson(2500.00,"junior");
     }
 
@@ -53,9 +53,13 @@ public class SalesPersonRepositoryImplTest {
         Assert.assertSame(newChechId,updated.getPosition());
     }
 
+    @Test
+    public void delete() {
+        this.repository.delete(salesperson.getPosition());
+        getAll();
+    }
 
-
-    @Test(expected=AssertionError.class)
+    @Test
     public void read() {
 
         Person read = this.repository.read(salesperson.getPosition());

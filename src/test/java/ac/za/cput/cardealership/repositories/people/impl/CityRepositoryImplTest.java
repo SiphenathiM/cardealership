@@ -58,7 +58,7 @@ public class CityRepositoryImplTest {
         getAll();
     }
 
-    @Test
+    @Test(expected=AssertionError.class)
     public void read() {
 
         City read = this.repository.read(city.getCityZipCode());

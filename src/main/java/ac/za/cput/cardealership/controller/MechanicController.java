@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("cardealrship/mechanic")
+@RequestMapping("/cardealrship/mechanic")
 public class MechanicController {
 
     @Autowired
     private MechanicServiceImpl service;
 
-    @GetMapping("/create/{checkAmount}")
+    @GetMapping("/create/{lastname}")
     public @ResponseBody
-    Mechanic create (@PathVariable String checkAmount){
-        Mechanic mechanic = MechanicFactory.getMechanic("mike","Ross");
+    Mechanic create (@PathVariable String fistname,String lastname){
+        Mechanic mechanic = MechanicFactory.getMechanic(fistname,lastname);
         return service.create(mechanic);
 
     }

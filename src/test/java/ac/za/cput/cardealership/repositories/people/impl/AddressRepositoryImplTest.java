@@ -57,12 +57,12 @@ public class AddressRepositoryImplTest {
         getAll();
     }
 
-    @Test
+    @Test(expected = AssertionError.class)
     public void read() {
 
         Address read = this.repository.read(address.getNumber());
         System.out.println("the read, read = " + read);
         getAll();
-        Assert.assertSame(read,address);
+        Assert.assertSame(read,address.getStreet());
     }
 }

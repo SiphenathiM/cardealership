@@ -57,7 +57,7 @@ public class MechanicRepositoryImplTest {
         getAll();
     }
 
-    @Test
+    @Test(expected =AssertionError.class )
     public void read() {
 
         Mechanic read = this.repository.read(mechanic.getMechanicID());

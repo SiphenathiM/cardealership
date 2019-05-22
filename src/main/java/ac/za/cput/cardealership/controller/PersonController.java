@@ -1,5 +1,6 @@
 package ac.za.cput.cardealership.controller;
 
+import ac.za.cput.cardealership.domain.people.Mechanic;
 import ac.za.cput.cardealership.domain.people.Person;
 import ac.za.cput.cardealership.factory.people.PersonFactory;
 import ac.za.cput.cardealership.repositories.people.PersonRepository;
@@ -27,11 +28,10 @@ public class PersonController {
     }
 
 
-/*@Controller
-class PersonController {
-    @RequestMapping("/")
+    @GetMapping ("/getall")
     @ResponseBody
-    public String hello() {
-       return  "Hello Spring Boot";
-    }*/
+
+    public Set<Person> getAll(){
+        return service.getAll();
+    }
 }
