@@ -22,7 +22,7 @@ public class AddressRepositoryImplTest {
     @Before
     public void setUp() throws Exception {
 
-        this.repository= (AddressRepositoryImpl) AddressRepositoryImpl.getRepository();
+        this.repository= (AddressRepositoryImpl) AddressRepositoryImpl.getAddressRepository();
         this.address= AddressFactory.getAddress("plain");
     }
 

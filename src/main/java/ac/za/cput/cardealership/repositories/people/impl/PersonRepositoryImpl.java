@@ -8,55 +8,50 @@ import java.util.Set;
 
 public class PersonRepositoryImpl implements PersonRepository {
 
-    private static PersonRepositoryImpl  repository = null;
-    private Set<Person> person;
+    private static PersonRepository personRepository;
+    private Set<Person> personDB;
 
     private PersonRepositoryImpl(){
-        this.person = new HashSet<>();
+        this.personDB = new HashSet<>();
     }
 
-    public static PersonRepositoryImpl  getRepository(){
-        if (repository == null) repository = new PersonRepositoryImpl ();
-        return repository;
+    public static PersonRepository  getPersonRepository(){
+        if (personRepository == null) personRepository = new PersonRepositoryImpl ();
+        return personRepository;
     }
 
-    private Person search(String Id){
-        return this.person.stream()
-                .filter( person -> person.getId().trim().equals( Id ) )
-                .findAny()
-                .orElse( null );
-    }
-
-    @Override
-    public Set<Person> getAll() {
-        return this.person;
-    }
 
     @Override
     public Person create(Person person) {
-        this.person.add(person);
+        this.personDB.add(person);
         return person;
     }
 
     @Override
     public Person update(Person person) {
-        Person toUpdate = search( person.getId() );
-        if(toUpdate != null){
-            this.person.remove( toUpdate );
+        Person p = read(person.getId());
+        if(p != null){
+            this.personDB.remove(p);
             return create( person );
         }
         return null;
     }
 
     @Override
-    public void delete(String id) {
-        Person person = search( id );
-        if(person != null) this.person.remove( person );
+    public void delete(String s) {
+        Person p = read(s);
+        this.personDB.remove(s);
+
     }
 
     @Override
-    public Person read(String id) {
-        Person person = search( id );
-        return person;
+    public Person read(String s) {
+        Person p = read(s);
+        return this.personDB.stream().filter(person -> person.getId().equalsIgnoreCase(s)).findAny().orElse(null);
+    }
+
+    @Override
+    public Set<Person> getAll() {
+        return this.personDB;
     }
 }

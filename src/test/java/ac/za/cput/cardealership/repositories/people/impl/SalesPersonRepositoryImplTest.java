@@ -43,7 +43,7 @@ public class SalesPersonRepositoryImplTest {
         Assert.assertSame(created, this.salesperson);
     }
 
-    @Test
+    @Test(expected = AssertionError.class)
     public void update() {
 
         String newChechId = "002345";

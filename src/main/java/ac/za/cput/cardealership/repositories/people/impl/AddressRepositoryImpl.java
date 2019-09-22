@@ -9,56 +9,50 @@ import java.util.Set;
 
 public class AddressRepositoryImpl implements AddressRepository {
 
-    private static AddressRepositoryImpl repository = null;
-    private Set<Address> addresses;
+  private static AddressRepository addressRepository;
 
-    private AddressRepositoryImpl(){
-        this.addresses = new HashSet<>();
-    }
+  private Set<Address>  addressDB;
 
-    public static AddressRepositoryImpl getRepository(){
-        if (repository == null) repository = new AddressRepositoryImpl();
-        return repository;
-    }
+  private  AddressRepositoryImpl(){
+      this.addressDB= new HashSet<>();
+  }
 
-    private Address search(String number){
-        return this.addresses.stream()
-                .filter(addresses -> addresses.getNumber().trim().equals(number ) )
-                .findAny()
-                .orElse( null );
-    }
+  public  static AddressRepository getAddressRepository(){
+      if (addressRepository==null) addressRepository=new AddressRepositoryImpl();
+      return addressRepository;
+  }
 
-
-    @Override
-    public Set<Address> getAll() {
-        return null;
-    }
 
     @Override
     public Address create(Address address) {
-        this.addresses.add(address);
-        return address;
+        this.addressDB.add(address);
+         return address;
+    }
+
+    @Override
+    public Address read(String s) {
+        return this.addressDB.stream().filter(address -> address.getNumber().equalsIgnoreCase(s)).findAny().orElse(null);
     }
 
     @Override
     public Address update(Address address) {
-        Address toUpdate = search(address.getNumber() );
-        if(toUpdate != null){
-            this.addresses.remove( toUpdate );
-            return create(address );
+        Address a = read(address.getNumber());
+        if (a!=null){
+            delete(a.getNumber());
+            return create(address);
         }
         return null;
     }
 
     @Override
-    public void delete(String number) {
-        Address address = search( number);
-        if(address != null) this.addresses.remove( address );
-    }
+    public void delete(String s) {
+      Address address = read(s);
+      this.addressDB.remove(address);
+  }
+
 
     @Override
-    public Address read(String number) {
-        Address  address = search( number );
-        return address;
+    public Set<Address> getAll() {
+        return  this.addressDB;
     }
 }

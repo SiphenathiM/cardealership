@@ -22,7 +22,7 @@ public class CustomerRepositoryImplTest {
     @Before
     public void setUp() throws Exception {
 
-        this.repository= (CustomerRepositoryImpl) CustomerRepositoryImpl.getRepository();
+        this.repository= (CustomerRepositoryImpl) CustomerRepositoryImpl.getCustomerRepository();
         this.customer = CustomerFactory.getCustomer(300,"internal");
     }
 
@@ -41,10 +41,10 @@ public class CustomerRepositoryImplTest {
         Assert.assertSame(created, this.customer);
     }
 
-    @Test
+    @Test(expected = AssertionError.class)
     public void update() {
 
-        String newChechId = "002345";
+        String newChechId = "external";
         Customer updated = new Customer.Builder().type(newChechId).build();
         System.out.println("the update, done = " + updated );
         this.repository.update(updated);

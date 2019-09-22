@@ -4,56 +4,59 @@ import ac.za.cput.cardealership.domain.vehicle.Car;
 import ac.za.cput.cardealership.repositories.vehicle.CarRepository;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class CarRepositoryImpl implements CarRepository {
 
 
-    private static CarRepositoryImpl respository = null;
-
-    private Map<String, Car> carTable;
+    private static CarRepository carRepository = null;
+    private Set<Car> carDB;
 
     private CarRepositoryImpl() {
-        carTable = new HashMap<String, Car>();
+        this.carDB = new HashSet<>();
     }
 
-    public static CarRepositoryImpl getInstance(){
-        if(respository==null)
-            respository = new CarRepositoryImpl();
-        return respository;
+    public static CarRepository getCarRepository(){
+        if(carRepository==null) carRepository = new CarRepositoryImpl();
+        return carRepository;
     }
 
 
     @Override
     public Car create(Car car) {
-        carTable.put(car.getCarID(),car);
-        Car savedCar = carTable.get(car.getCarID());
-        return savedCar;
+        this.carDB.add(car);
+        return car;
     }
 
 
     @Override
-    public Car read(String carID) {
-        Car car  = carTable.get(carID);
-        return car ;
+    public Car read(String s) {
+        Car c = this.carDB.stream().filter(car -> car.getSerialNumber().equalsIgnoreCase(s)).findAny().orElse(null);
+        return  c;
     }
 
 
     @Override
     public Car update(Car car) {
-        carTable.put(car.getCarID(),car);
-        Car savedCar= carTable.get(car.getCarID());
-        return savedCar;
+        Car p = read(car.getSerialNumber());
+        if(p != null){
+            this.carDB.remove(p);
+            return create(car);
+        }
+        return null;
     }
 
     @Override
-    public void delete(String carID) {
-        carTable.remove(carID);
+    public void delete(String s) {
+        Car c = read(s);
+        this.carDB.remove(c);
     }
 
     @Override
     public Set<Car> getAll() {
-        return null;
+
+        return this.carDB;
     }
 }

@@ -24,7 +24,7 @@ public class PersonRepositoryImplTest {
     @Before
     public void setUp() throws Exception {
 
-        this.repository= (PersonRepositoryImpl) PersonRepositoryImpl.getRepository();
+        this.repository= (PersonRepositoryImpl) PersonRepositoryImpl.getPersonRepository();
         this.person = PersonFactory.getPerson("mike","ross","085485217");
     }
 

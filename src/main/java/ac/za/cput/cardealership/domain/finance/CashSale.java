@@ -2,7 +2,7 @@ package ac.za.cput.cardealership.domain.finance;
 
 import ac.za.cput.cardealership.domain.finance.Sale;
 
-public class CashSale extends Sale {
+public class CashSale  {
 
     private String payType;
 
@@ -10,8 +10,6 @@ public class CashSale extends Sale {
         return payType;
     }
 
-    public CashSale(Builder builder, String payType) {
-        super(builder);
-        this.payType = payType;
+
     }
-}
+

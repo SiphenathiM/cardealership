@@ -1,14 +1,11 @@
 package ac.za.cput.cardealership.services.vehicle;
 
 import ac.za.cput.cardealership.domain.vehicle.Car;
+import ac.za.cput.cardealership.services.IService.IService;
 
-public interface CarService {
+import java.util.Set;
 
-    Car create(Car car);
+public interface CarService extends IService<Car,String> {
 
-    Car read(String carID);
-
-    Car update(Car car);
-
-    void delete(String carID);
+    Set<Car> getAll();
 }

@@ -4,54 +4,60 @@ import ac.za.cput.cardealership.domain.vehicle.CarModel;
 import ac.za.cput.cardealership.repositories.vehicle.CarModelRepository;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class CarModelRepositoryImpl implements CarModelRepository {
 
-    private static CarModelRepositoryImpl respository = null;
+    private static CarModelRepository carModelRepository;
 
-    private Map<String,CarModel> carModelTable;
+    private Set<CarModel> carModelDB;
 
     private CarModelRepositoryImpl() {
-        carModelTable = new HashMap<String, CarModel>();
+        this.carModelDB = new HashSet<>();
     }
 
-    public static CarModelRepositoryImpl getInstance(){
-        if(respository==null)
-            respository = new CarModelRepositoryImpl();
-        return respository;
+    public static CarModelRepository getCarModelRepository(){
+        if(carModelRepository==null)
+            carModelRepository = new CarModelRepositoryImpl();
+        return carModelRepository;
     }
 
 
 
     @Override
     public CarModel create(CarModel model) {
-        carModelTable.put(model.getName(),model);
-        CarModel savedModels = carModelTable.get(model.getName());
-        return savedModels;
-    }
-
-    @Override
-    public CarModel read(String name) {
-        CarModel model  = carModelTable.get(name);
+        this.carModelDB.add(model);
         return model;
     }
 
     @Override
-    public CarModel update(CarModel model) {
-        carModelTable.put(model.getName(),model);
-        CarModel savedModels= carModelTable.get(model.getName());
-        return savedModels;
+    public CarModel read(String s) {
+
+        CarModel c =this.carModelDB.stream().filter(carModel ->carModel.getName().equalsIgnoreCase(s)).findAny().orElse(null);
+        return  c;
     }
 
     @Override
-    public void delete(String model) {
-        carModelTable.remove(model);
+    public CarModel update(CarModel model) {
+        CarModel c = read(model.getName());
+        if (c!=null){
+            this.carModelDB.remove(c);
+            return create(model);
+        }
+
+        return  null;
+    }
+
+    @Override
+    public void delete(String s) {
+        CarModel c = read(s);
+        this.carModelDB.remove(c);
     }
 
     @Override
     public Set<CarModel> getAll() {
-        return null;
+        return this.carModelDB;
     }
 }

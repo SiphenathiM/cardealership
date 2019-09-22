@@ -23,7 +23,7 @@ public class CityRepositoryImplTest {
     @Before
     public void setUp() throws Exception {
 
-        this.repository= (CityRepositoryImpl) CityRepositoryImpl.getRepository();
+        this.repository= (CityRepositoryImpl) CityRepositoryImpl.getCityRepository();
         this.city= CityFactory.getCity("4478","plain");
     }
 

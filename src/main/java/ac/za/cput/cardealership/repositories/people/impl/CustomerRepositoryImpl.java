@@ -8,56 +8,49 @@ import java.util.Set;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-    private static CustomerRepositoryImpl repository = null;
-    private Set<Customer> customer;
+    private static CustomerRepository customerRepository;
+    private Set<Customer> customerDB;
 
     private CustomerRepositoryImpl(){
-        this.customer = new HashSet<>();
+        this.customerDB = new HashSet<>();
     }
 
-    public static CustomerRepositoryImpl getRepository(){
-        if (repository == null) repository = new CustomerRepositoryImpl();
-        return repository;
+    public static CustomerRepository getCustomerRepository(){
+        if (customerRepository == null) customerRepository = new CustomerRepositoryImpl();
+        return customerRepository;
     }
 
-    private Customer search(String type){
-        return this.customer.stream()
-                .filter(customer -> customer.getType().trim().equals( type ) )
-                .findAny()
-                .orElse( null );
-    }
-
-
-    @Override
-    public Set<Customer> getAll() {
-        return null;
-    }
 
     @Override
     public Customer create(Customer customer) {
-        this.customer.add(customer);
+        this.customerDB.add(customer);
         return customer;
     }
 
     @Override
+    public Customer read(String s) {
+       return this.customerDB.stream().filter(customer -> customer.getType().equalsIgnoreCase(s)).findAny().orElse(null);
+    }
+
+    @Override
     public Customer update(Customer customer) {
-        Customer toUpdate = search(customer.getType() );
-        if(toUpdate != null){
-            this.customer.remove( toUpdate );
-            return create(customer );
+        Customer c =read(customer.getType() );
+        if(c != null){
+            delete(c.getType());
+            return create(customer);
         }
         return null;
     }
 
     @Override
-    public void delete(String type) {
-        Customer customer = search( type);
-        if(customer != null) this.customer.remove( customer );
+    public void delete(String  s) {
+        Customer c = read(s);
+        this.customerDB.remove(c);
     }
 
+
     @Override
-    public Customer read(String type) {
-        Customer customer = search( type );
-        return customer;
+    public Set<Customer> getAll() {
+        return this.customerDB;
     }
 }
