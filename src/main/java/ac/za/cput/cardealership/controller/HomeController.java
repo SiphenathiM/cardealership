@@ -10,6 +10,6 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/cardealership"})
     public ResponseEntity<String> home() {
-        return new ResponseEntity<>("Welcome to Payroll App!", HttpStatus.OK);
+        return new ResponseEntity<>("Welcome to Cardealership App!", HttpStatus.OK);
     }
 }

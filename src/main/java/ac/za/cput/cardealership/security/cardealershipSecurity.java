@@ -33,13 +33,11 @@ public class cardealershipSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic()
-                .and()
+
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"cardealership/lookup/**/create/**").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET,"/cardealership/**/create").hasRole(ADMIN_ROLE)
                 .and()
-                .csrf().disable()
-                .formLogin().disable();
+                .formLogin();
 
     }
 
